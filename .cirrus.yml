@@ -41,10 +41,11 @@ task:
   << : *GLOBAL_TASK_TEMPLATE
   build_script:
     - cd bitcoin-core
-    - ./contrib/install_db4.sh `pwd`
     - ./test/get_previous_releases.py -b -t ./build/releases
     - cd build
-    - ../configure --enable-zmq --enable-lcov --enable-lcov-branch-coverage --disable-bench --enable-extended-functional-tests
+    - ../contrib/install_db4.sh `pwd`
+    - export BDB_PREFIX='/tmp/cirrus-ci-build/bitcoin-core/build/db4'
+    - ../configure BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include" --enable-zmq --enable-lcov --enable-lcov-branch-coverage --disable-bench --enable-extended-functional-tests
     - make $MAKEJOBS
     - make cov
   upload_script:
