@@ -43,7 +43,7 @@ task:
     - cd bitcoin-core
     - ./test/get_previous_releases.py -b -t ./build/releases
     - cd build
-    - ../configure --enable-zmq --with-incompatible-bdb --enable-lcov --enable-lcov-branch-coverage --disable-bench --enable-extended-functional-tests
+    - ../configure --enable-zmq --enable-lcov --enable-lcov-branch-coverage --disable-bench --enable-extended-functional-tests
     - make $MAKEJOBS
     - make cov
   upload_script:
