@@ -41,9 +41,9 @@ task:
   << : *GLOBAL_TASK_TEMPLATE
   build_script:
     - cd bitcoin-core
+    - ./contrib/install_db4.sh `pwd`
     - ./test/get_previous_releases.py -b -t ./build/releases
     - cd build
-    - ../contrib/install_db4.sh `pwd`
     - ../configure --enable-zmq --enable-lcov --enable-lcov-branch-coverage --disable-bench --enable-extended-functional-tests
     - make $MAKEJOBS
     - make cov
